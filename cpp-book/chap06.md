@@ -9,7 +9,8 @@ Dynamic memory allocation allows you to allocate memory during runtime using the
 #include <iostream>
 using namespace std;
 
-int main() {
+int main() 
+{
     int* dynamicInt = new int(5);  // Dynamically allocate memory for an integer
     cout << "Value of dynamicInt: " << *dynamicInt << endl;
     delete dynamicInt;  // Free the allocated memory

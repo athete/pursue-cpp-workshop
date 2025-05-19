@@ -2,7 +2,8 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int main() 
+{
     int arr[] = {14, 15, 16, 17};
     vector<int> vec(arr, arr + sizeof(arr) / sizeof(int));
     vec.push_back(18);

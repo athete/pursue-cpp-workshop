@@ -1,9 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int main () {
+int main () 
+{
     int i = 0;
-    do {
+    do 
+    {
         cout << i << "\n";
         ++i;
     } while (i <= 25);

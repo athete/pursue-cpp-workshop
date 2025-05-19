@@ -2,13 +2,15 @@
 #include <string>
 using namespace std;
 
-int main(){
+int main()
+{
     int input;
     cout << "What is your favorite color (input the number):\n";
     cout << "1. Red \n2. Blue\n3. Green\n4. Yellow\n";
     cin >> input;
 
-    switch (input){
+    switch (input)
+    {
         case 1:
             cout << "You must like apples!\n";
             break;
