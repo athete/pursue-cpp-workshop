@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 2: From Python to C++ &#8212; PURSUE C++ Tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap02';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 3: Functions and Memory" href="chap03.html" />
+    <link rel="prev" title="Chapter 1: Compiled and Interpreted Languages" href="chap01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PURSUE C++ Tutorial</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chap00.html">Chapter 0: Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1: Compiled and Interpreted Languages</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2: From Python to C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3: Functions and Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4: Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5: An Example of C++ in HEP</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/athete/pursue-cpp-workshop/tree/main" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/athete/pursue-cpp-workshop/tree/main/issues/new?title=Issue%20on%20page%20%2Fchap02.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chap02.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 2: From Python to C++</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-things-first">First Things First…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-types">Variables and Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-types">Basic Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-vectors">Arrays &amp; Vectors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statements-control-flow">Statements &amp; Control Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else"><code class="docutils literal notranslate"><span class="pre">if-else</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for"><code class="docutils literal notranslate"><span class="pre">for</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while"><code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-while"><code class="docutils literal notranslate"><span class="pre">do-while</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#break-continue"><code class="docutils literal notranslate"><span class="pre">break</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">continue</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#switch"><code class="docutils literal notranslate"><span class="pre">switch</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chapter-2-from-python-to-c">
+<h1>Chapter 2: From Python to C++<a class="headerlink" href="#chapter-2-from-python-to-c" title="Link to this heading">#</a></h1>
+<p>In this chapter, we will introduce fundamental concepts in C++ by seeing how elements from Python such as variables, flow control and functions look like in C++. In the end, we will look at
+more complex comparative examples. It should be stressed that there are fundamental paradigmatic differences between C++ and Python, not just at the syntactic level. While two different programs written in C++ and Python might have the same behaviour or outputs, they operate differently under the hood.</p>
+<section id="first-things-first">
+<h2>First Things First…<a class="headerlink" href="#first-things-first" title="Link to this heading">#</a></h2>
+<p>Before we can jump into programming in C++, we need to cover some fundamental points neccesary for actually running any C++ code. Consider the following, very simple code in Python.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos">2</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="linenos">3</span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The sum of </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we were to translate this into C++, it would look something like the following.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The sum of &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; and &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">12</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s go line by line to understand the elements introduced by C++ in this example:</p>
+<ul>
+<li><p>Line 1-2:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;iostream&gt;</span></code> is called a preprocessor directive. Think of this as <code class="docutils literal notranslate"><span class="pre">import</span></code> in Python. In this case its “importing” <code class="docutils literal notranslate"><span class="pre">iostream</span></code>, which is part of the standard library and includes tools to read and write text to/from the console such as <code class="docutils literal notranslate"><span class="pre">cout</span></code> and <code class="docutils literal notranslate"><span class="pre">cin</span></code>.</p></li>
+<li><p>In C++, code is organized into namespaces. In practice, this allows us to have functions with the same name. For instance, I could have a namespace called <code class="docutils literal notranslate"><span class="pre">space1</span></code> and another <code class="docutils literal notranslate"><span class="pre">space2</span></code>, both of which have a function defined within them called <code class="docutils literal notranslate"><span class="pre">func</span></code> and I could use them both in my code by specifying which namespace I am referring to when I call the function <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">space1</span><span class="o">::</span><span class="n">func</span><span class="p">();</span>
+<span class="n">space2</span><span class="o">::</span><span class="n">func</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p>By specifying that we are using the namespace <code class="docutils literal notranslate"><span class="pre">std</span></code>, we avoid having to specifying that <code class="docutils literal notranslate"><span class="pre">cout</span></code>, which is part of the <code class="docutils literal notranslate"><span class="pre">std</span></code> namespace, indeed comes from said namespace. If line 2 was not there, we would need to write <code class="docutils literal notranslate"><span class="pre">std::cout</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Line 4</p>
+<ul class="simple">
+<li><p>This line is a function header for a function called <code class="docutils literal notranslate"><span class="pre">main</span></code> which we indicate will return a value of type <code class="docutils literal notranslate"><span class="pre">int</span></code>. This function is fundamental because <strong>every C++ program starts by running the <code class="docutils literal notranslate"><span class="pre">main</span></code> function</strong>.</p></li>
+<li><p>Unlike in Python where we indicate that a set of statements are part of a function by indenting them with respect to the function header, in C++ we indicate this by having these statements enclosed by <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Lines 5 to 10</p>
+<ul>
+<li><p>These lines define the body of the function <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p>Notice that each statement ends in <code class="docutils literal notranslate"><span class="pre">;</span></code>. This tells the compiler that that is the end of that particular statement. This is neccesary to add because, unlike Python, C++ is a <strong>whitespace-independent language</strong> which means that the following two snippets of code are completely equivalent to the compiler and thus, without <code class="docutils literal notranslate"><span class="pre">;</span></code>, there would be no way for the compiler to know that it had reached the end of a statement[^hard2read].</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<p>We will discuss the rest of the elements seen in the code snipper as we go along, but take some time to try to deduce what each part is doing.</p>
+</section>
+<section id="variables-and-types">
+<h2>Variables and Types<a class="headerlink" href="#variables-and-types" title="Link to this heading">#</a></h2>
+<section id="basic-types">
+<h3>Basic Types<a class="headerlink" href="#basic-types" title="Link to this heading">#</a></h3>
+<p>In Python, if you want to define a variable of type <code class="docutils literal notranslate"><span class="pre">int</span></code> you simply need to write <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code>, and the interpreter will infer the type. This is because Python is a <strong>dynamically typed</strong> language, which means that type checking and type assignment of variables happens at runtime and the type of a variable will be based on the value assigned to it. This also means that we can declare a variable to have a value of a particular type, but then assign it a value of a different type. For instance, the following is valid in Python.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;This is a string!&quot;</span>
+</pre></div>
+</div>
+<p>C++, however, is a statically typed language. This means that type assignment and checking is done at <em>compile time</em> and that, when we declare a variable, we must specify its type and that this type is unchanging. Thus the following works</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>but this will cause an error when you attempt to compile</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.45</span><span class="p">;</span><span class="w"> </span><span class="c1">// Not an integer!</span>
+</pre></div>
+</div>
+<p>Note that, just like in Python has some reserved keywords which you would not want to name your variables (e.g. <code class="docutils literal notranslate"><span class="pre">print</span></code> is a terrible name for a variable!), C++ also has a set of reserved names. For instance, if you try to call a variable <code class="docutils literal notranslate"><span class="pre">return</span></code>, the compiler will complain. You can ready more about these reserved keywords <a class="reference external" href="https://en.cppreference.com/w/cpp/keyword">here</a>. In addition to these restrictions, C++ has other rules for what variable names are valid. In order for an identifier to be valid, it must obey the following conditions:</p>
+<ul class="simple">
+<li><p>It must be a sequence of one or more letters, digits, or underscore</p></li>
+<li><p>It must NOT include spaces, punctuation marks &amp; symbols</p></li>
+<li><p>It must ALWAYS begin with letter or underscore (though the latter is usually reserved for special purposes)</p></li>
+<li><p>It must NOT be one of the reserved keywords in C++</p></li>
+</ul>
+<p>The following table shows some of the data types found in C++ which you might find most familiar having some knowledge of Python. Note that there are more data types than these which we will see later, but these will at least get you started.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id1">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Some Fundamental Types in C++</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Keyword</p></th>
+<th class="head"><p>Example value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Boolean</p></td>
+<td><p>bool</p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-odd"><td><p>Character</p></td>
+<td><p>char</p></td>
+<td><p>“c”</p></td>
+</tr>
+<tr class="row-even"><td><p>Integer</p></td>
+<td><p>int</p></td>
+<td><p>64</p></td>
+</tr>
+<tr class="row-odd"><td><p>Floating point</p></td>
+<td><p>float</p></td>
+<td><p>3.14</p></td>
+</tr>
+<tr class="row-even"><td><p>Double floating point</p></td>
+<td><p>double</p></td>
+<td><p>6.15</p></td>
+</tr>
+<tr class="row-odd"><td><p>Valueless</p></td>
+<td><p>void</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-even"><td><p>String</p></td>
+<td><p>std:string</p></td>
+<td><p>“Hello World!”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In C++ we also have arrays. An array is a series of elements of the same type (thus occupying the same amount of memory) in a contiguous memory location. Each of them can be refereced with an index.</p>
+</section>
+<section id="arrays-vectors">
+<h3>Arrays &amp; Vectors<a class="headerlink" href="#arrays-vectors" title="Link to this heading">#</a></h3>
+<p>An array, the C++ equivalent of a tuple in Python, is a series of elements of the same type (and thus each occupying the same amount of memory) in a contiguous memory location. Just like with tuples in Python, each element can be refereced with an index. So, for example, while in Python we might have something like the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tuple_of_nums</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="n">num1</span> <span class="o">=</span> <span class="n">list_of_nums</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The second number in the tuple is: &quot;</span><span class="p">,</span> <span class="n">num1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C++, we would have something like this instead</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span>
+<span class="linenos">5</span><span class="p">{</span>
+<span class="linenos">6</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">arr_of_nums</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">};</span>
+<span class="linenos">7</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr_of_nums</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w"> </span><span class="c1">// Value 15 is copied and assigned to x</span>
+<span class="linenos">8</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The second number in the array is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="linenos">9</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, we are defining an array <code class="docutils literal notranslate"><span class="pre">arr_of_num</span></code> which we tell the computer will have elements of size <code class="docutils literal notranslate"><span class="pre">int</span></code> (usually 4 bytes). In additional, we are initializing the array with some integers. Note that when we assign <code class="docutils literal notranslate"><span class="pre">arr_of_nums[1]</span></code> to <code class="docutils literal notranslate"><span class="pre">x</span></code>, what happens is that the value is <em>copied</em> and assigned to x.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unlike in Python, in C++ it is possible to use an out of bounds index when fetching an element from an array. This is because when you do <code class="docutils literal notranslate"><span class="pre">int_arr[n]</span></code> all your computer is doing is finding the space space in memory <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span> <span class="pre">*</span> <span class="pre">n</span></code> away from <code class="docutils literal notranslate"><span class="pre">int_arr[0]</span></code>, which can go beyond the actual space alloted for the array. To see this in action, run the following code. Your compiler might complain, but if it does indeed compile, you see that what is printed to the console is junk because we are accessing some random piece of memory. Do this at your own risk and, in practice, try to never do it! You could break something or cause your program to behave unexpectedly.</p>
+</div>
+<p>One limitation with arrays is that the size of the array is unchangeable[^arrsize]. However, C++ offers an alternative called vectors which are dynamic arrays that can change in size, making them the Python equivalent of lists. So, for example, in Python we might have something like the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst_nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span>
+<span class="n">lst_nums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span> <span class="c1"># Adding an element to the list</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added element&quot;</span><span class="p">,</span> <span class="n">lst_nums</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Whereas, in C++, using vectors we would have:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 3</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 6</span><span class="p">{</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">};</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Added element: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vec</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="linenos">10</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">push_back</span></code> is the C++ equivalent of <code class="docutils literal notranslate"><span class="pre">append</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the above example does not compile for you, it might due to the way we are initializing the vector, which is only compatible with C++11 or later. To fix this, add <code class="docutils literal notranslate"><span class="pre">-std=c+11</span></code> when you go to compile, or use the included extra example, <code class="docutils literal notranslate"><span class="pre">examples_cpp/c2_vectspushbackold.cpp</span></code> which does not use this way of initializing.</p>
+</div>
+</section>
+</section>
+<section id="statements-control-flow">
+<h2>Statements &amp; Control Flow<a class="headerlink" href="#statements-control-flow" title="Link to this heading">#</a></h2>
+<p>In Python, we have the well known flow control statements <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statements, <code class="docutils literal notranslate"><span class="pre">while</span></code> loops, etc. All of these are used to allow us to repeat operations in our code or to allow it to branch depending on some pre-defined conditions. C++ also has its own control flow statements, many of which will be familiar to you. To get started, in the table below, we present a summary of the main control flow statements in C++. In the subsequent sub-sections, we will cover the most basic and useful of these by starting with a Python example at first, and then seeing the equivalent in C++.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id2">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Flow Control Statements in C++</span><a class="headerlink" href="#id2" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Implemented in C++ by</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Conditional statements</p></td>
+<td><p>Set of statements will only be executed if a condition is met.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">else</span></code>, <code class="docutils literal notranslate"><span class="pre">switch</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Jumps</p></td>
+<td><p>Start executing statements at another location</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">goto</span></code>, <code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Function calls</p></td>
+<td><p>Jumps to another location and back</p></td>
+<td><p>functional calls, <code class="docutils literal notranslate"><span class="pre">return</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Loops</p></td>
+<td><p>Repeatedly execute a set of statements until some condition is met.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span></code>, <code class="docutils literal notranslate"><span class="pre">do-while</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">ranged-for</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Halts</p></td>
+<td><p>Terminate the program</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::exit()</span></code>, <code class="docutils literal notranslate"><span class="pre">std::abort()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Exceptions</p></td>
+<td><p>Error handling</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">try</span></code>, <code class="docutils literal notranslate"><span class="pre">throw</span></code>, <code class="docutils literal notranslate"><span class="pre">catch</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="if-else">
+<h3><code class="docutils literal notranslate"><span class="pre">if-else</span></code><a class="headerlink" href="#if-else" title="Link to this heading">#</a></h3>
+<p>In Python, we might have something like the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="linenos">2</span><span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<span class="linenos">3</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x is greater than 5&quot;</span><span class="p">)</span>
+<span class="linenos">4</span><span class="k">elif</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="linenos">5</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x is in between 5 and 0 (inclusive)&quot;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">7</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x is negative&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C++, the equivalent would be:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 6</span><span class="p">{</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x is greater than 5 </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="linenos">12</span><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span>
+<span class="linenos">13</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos">14</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x is in between 5 and 0 (inclusive) </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">15</span><span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="linenos">16</span><span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<span class="linenos">17</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos">18</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x is negative </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">19</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">20</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="for">
+<h3><code class="docutils literal notranslate"><span class="pre">for</span></code><a class="headerlink" href="#for" title="Link to this heading">#</a></h3>
+<p>In Python, we might iterate over a list like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C++, the equivalent <code class="docutils literal notranslate"><span class="pre">for</span></code> loop woudl be:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">10</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="while">
+<h3><code class="docutils literal notranslate"><span class="pre">while</span></code><a class="headerlink" href="#while" title="Link to this heading">#</a></h3>
+<p>A Python <code class="docutils literal notranslate"><span class="pre">while</span></code> loop might look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">2</span><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+<span class="linenos">3</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>In C++, the same logic would be:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">10</span><span class="w">        </span><span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">12</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="do-while">
+<h3><code class="docutils literal notranslate"><span class="pre">do-while</span></code><a class="headerlink" href="#do-while" title="Link to this heading">#</a></h3>
+<p>Python does not a have a direct implementatinon of <code class="docutils literal notranslate"><span class="pre">do-while</span></code> loops. However, we can create the logic. It would be as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">6</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span>
+<span class="linenos">7</span>        <span class="k">break</span>
+</pre></div>
+</div>
+<p>In C++, this same logic would look like</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="k">do</span><span class="w"> </span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">10</span><span class="w">        </span><span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">25</span><span class="p">);</span>
+<span class="linenos">12</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="break-continue">
+<h3><code class="docutils literal notranslate"><span class="pre">break</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">continue</span></code><a class="headerlink" href="#break-continue" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code> work in the exact same way in C++ as they do in Python. For instance, in Python we might have something like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">max_num</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_num</span><span class="p">):</span>
+<span class="linenos"> 4</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="k">break</span>
+<span class="linenos"> 6</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="k">continue</span>
+<span class="linenos"> 8</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;End of loop!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C++, the same code would look like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">max_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">max_num</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span><span class="w"> </span>
+<span class="linenos">10</span><span class="w">        </span><span class="p">{</span>
+<span class="linenos">11</span><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="linenos">12</span><span class="w">        </span><span class="p">}</span><span class="w"> </span>
+<span class="linenos">13</span><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<span class="linenos">14</span><span class="w">        </span><span class="p">{</span>
+<span class="linenos">15</span><span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="linenos">16</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">17</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="linenos">18</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">19</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End of loop!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">20</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="switch">
+<h3><code class="docutils literal notranslate"><span class="pre">switch</span></code><a class="headerlink" href="#switch" title="Link to this heading">#</a></h3>
+<p>If you have a fixed set of possible ramifications that you want your code to go down, the you would use <code class="docutils literal notranslate"><span class="pre">switch</span></code>. They are equivalent to a set of <code class="docutils literal notranslate"><span class="pre">if-elif-else</span></code> statements in Python, but they are not directly implemented. For instance, in Python, we might have the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="linenos"> 2</span><span class="s2">What is your favortie color (input the number):</span>
+<span class="linenos"> 3</span><span class="s2">      1. Red</span>
+<span class="linenos"> 4</span><span class="s2">      2. Blue</span>
+<span class="linenos"> 5</span><span class="s2">      3. Green</span>
+<span class="linenos"> 6</span><span class="s2">      4. Yellow</span>
+<span class="linenos"> 7</span><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">user_input</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">if</span> <span class="n">user_input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You must like apples!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="k">elif</span> <span class="n">user_input</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You must like looking at the sky!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="k">elif</span> <span class="n">user_input</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos">16</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You must like vegetables!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="k">elif</span> <span class="n">user_input</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+<span class="linenos">18</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You must like looking at the Sun! (And you should probably stop...)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I&#39;ve never heard of that color...:(</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C++, we could implement this rather easily with <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statements, but it can be done more straightforwardly using <code class="docutils literal notranslate"><span class="pre">switch</span></code>. The following snippet is the C++ translation of this.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="linenos"> 3</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="linenos"> 6</span><span class="p">{</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;What is your favorite color (input the number):</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;1. Red </span><span class="se">\n</span><span class="s">2. Blue</span><span class="se">\n</span><span class="s">3. Green</span><span class="se">\n</span><span class="s">4. Yellow</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">10</span><span class="w">    </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
+<span class="linenos">13</span><span class="w">    </span><span class="p">{</span>
+<span class="linenos">14</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="linenos">15</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;You must like apples!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">16</span><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="linenos">18</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;You must like looking at the sky!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">19</span><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="linenos">20</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="linenos">21</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;You must like vegetables!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">22</span><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="linenos">23</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span>
+<span class="linenos">24</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;You must like looking at the Sun! (And you should probably stop...)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">25</span><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="linenos">26</span><span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="linenos">27</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;I&#39;ve never heard of that color... :(</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="linenos">28</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">29</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">30</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<p>Functions in C++ work very similary to how they work in Python. However, there are some additional complications regarding memory and how values are passed to them which will be discussed later on. For now, we can familiarize ourselves with functions by seeing how they are structured in both Python and C++. In Python, we may have a function like the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C++, the equivalent function would be:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="p">}</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="linenos">10</span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="linenos">11</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">12</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chap01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1: Compiled and Interpreted Languages</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chap03.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 3: Functions and Memory</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-things-first">First Things First…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-types">Variables and Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-types">Basic Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-vectors">Arrays &amp; Vectors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statements-control-flow">Statements &amp; Control Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else"><code class="docutils literal notranslate"><span class="pre">if-else</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for"><code class="docutils literal notranslate"><span class="pre">for</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while"><code class="docutils literal notranslate"><span class="pre">while</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-while"><code class="docutils literal notranslate"><span class="pre">do-while</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#break-continue"><code class="docutils literal notranslate"><span class="pre">break</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">continue</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#switch"><code class="docutils literal notranslate"><span class="pre">switch</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ameya Thete
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
