@@ -6,7 +6,7 @@ The software tools used to execute the examples introduced in this session, as w
 
 Add the following to your *local* `~/.ssh/config` file
 
-```{code-cell}
+```{code}
 Host cmslpc-*.fnal.gov
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
@@ -14,7 +14,7 @@ Host cmslpc-*.fnal.gov
 
 and log into the LPC cluster. Once you have logged in, run the following commands
 
-```{code-cell}
+```{code}
 mkdir nobackup/PURSUE-CPP
 cd nobackup/PURSUE-CPP
 cmsrel CMSSW_15_0_0
@@ -26,7 +26,7 @@ cd pursue-cpp-workshop
 
 To test that you have the right environment installed, complie and run `helloworld.cpp`
 
-```{code-cell}
+```{code}
 cd examples
 g++ -o helloworld helloworld.cpp
 ./helloworld
@@ -41,19 +41,19 @@ Hello, World!
 
 If you instead choose to run the examples locally, your machine should already have a C++ compiler packaged with the operating system. To make sure that this is the case, run ```g++ --version```. This prints the version of the C++ compiler installed on your computer, if you get any other output complaining about the command not being found, run the following to install it
 
-```{code-cell}
+```{code}
 sudo yum install gcc-c++
 ```
 
 Next, clone this repository
-```{code-cell}
+```{code}
 git clone https://github.com/athete/pursue-cpp-workshop
 cd pursue-cpp-workshop
 ```
 
 And test that everything is running as expected by compiling and running `helloworld.cpp`
 
-```{code-cell}
+```{code}
 cd examples
 g++ -o helloworld helloworld.cpp
 ./helloworld

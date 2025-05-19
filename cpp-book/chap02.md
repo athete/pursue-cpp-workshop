@@ -7,7 +7,7 @@ more complex comparative examples. It should be stressed that there are fundamen
 
 Before we can jump into programming in C++, we need to cover some fundamental points neccesary for actually running any C++ code. Consider the following, very simple code in Python.
 
-```{literalinclude} ../examples_py/c2_pyeg.py
+```{literalinclude} ../examples_python/c2_pyeg.py
 :language: py
 :lineno-match:
 ```
@@ -186,7 +186,7 @@ In Python, we have the well known flow control statements `if-else` statements, 
 
 In Python, we might have something like the following
 
-```{literalinclude} ../examples_py/c2_ifelse.py
+```{literalinclude} ../examples_python/c2_ifelse.py
 :language: python
 :lineno-match:
 ```
@@ -202,7 +202,7 @@ In C++, the equivalent would be:
 
 In Python, we might iterate over a list like this:
 
-```{literalinclude} ../examples_py/c2_for.py
+```{literalinclude} ../examples_python/c2_for.py
 :language: python
 :lineno-match:
 ```
@@ -217,7 +217,7 @@ In C++, the equivalent `for` loop woudl be:
 
 A Python `while` loop might look like this:
 
-```{literalinclude} ../examples_py/c2_while.py
+```{literalinclude} ../examples_python/c2_while.py
 :language: python
 :lineno-match:
 ```
@@ -233,7 +233,7 @@ In C++, the same logic would be:
 
 Python does not a have a direct implementatinon of `do-while` loops. However, we can create the logic. It would be as follows:
 
-```{literalinclude} ../examples_py/c2_dowhile.py
+```{literalinclude} ../examples_python/c2_dowhile.py
 :language: python
 :lineno-match:
 ```
@@ -249,7 +249,7 @@ In C++, this same logic would look like
 
 `break` and `continue` work in the exact same way in C++ as they do in Python. For instance, in Python we might have something like this:
 
-```{literalinclude} ../examples_py/c2_breakcont.py
+```{literalinclude} ../examples_python/c2_breakcont.py
 :language: python
 :lineno-match:
 ```
@@ -264,7 +264,7 @@ In C++, the same code would look like this:
 
 If you have a fixed set of possible ramifications that you want your code to go down, the you would use `switch`. They are equivalent to a set of `if-elif-else` statements in Python, but they are not directly implemented. For instance, in Python, we might have the following:
 
-```{literalinclude} ../examples_py/c2_switch.py
+```{literalinclude} ../examples_python/c2_switch.py
 :language: python
 :lineno-match:
 ```
