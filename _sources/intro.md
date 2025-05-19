@@ -1,4 +1,4 @@
-# Welcome to your Jupyter Book
+# Welcome to the 2025 PURSUE C++ Training Module!
 
 This page hosts the lecture notes used for the PURSUE C++ tutorial session. The material assumes that students have had some prior exposure to Python.
 Using this baseline knowledge as a foundation, we introduce basic concepts of C++. Later, we highlight and study the differences between Python and C++ and at the very end, we analyze an example of how C++ is used in high-energy physics. 
