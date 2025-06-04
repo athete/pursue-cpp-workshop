@@ -17,6 +17,7 @@ and log into the LPC cluster. Once you have logged in, run the following command
 ```{code}
 mkdir nobackup/PURSUE-CPP
 cd nobackup/PURSUE-CPP
+source /cvmfs/cms.cern.ch/cmsset_default.sh
 cmsrel CMSSW_15_0_0
 cd CMSSW_15_0_0/src/
 cmsenv
@@ -27,7 +28,7 @@ cd pursue-cpp-workshop
 To test that you have the right environment installed, complie and run `helloworld.cpp`
 
 ```{code}
-cd examples
+cd examples_cpp
 g++ -o helloworld helloworld.cpp
 ./helloworld
 ```

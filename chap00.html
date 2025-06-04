@@ -403,6 +403,7 @@ document.write(`
 <p>and log into the LPC cluster. Once you have logged in, run the following commands</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">nobackup</span><span class="o">/</span><span class="n">PURSUE</span><span class="o">-</span><span class="n">CPP</span>
 <span class="n">cd</span> <span class="n">nobackup</span><span class="o">/</span><span class="n">PURSUE</span><span class="o">-</span><span class="n">CPP</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">cms</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">cmsset_default</span><span class="o">.</span><span class="n">sh</span>
 <span class="n">cmsrel</span> <span class="n">CMSSW_15_0_0</span>
 <span class="n">cd</span> <span class="n">CMSSW_15_0_0</span><span class="o">/</span><span class="n">src</span><span class="o">/</span>
 <span class="n">cmsenv</span>
@@ -411,7 +412,7 @@ document.write(`
 </pre></div>
 </div>
 <p>To test that you have the right environment installed, complie and run <code class="docutils literal notranslate"><span class="pre">helloworld.cpp</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples_cpp</span>
 <span class="n">g</span><span class="o">++</span> <span class="o">-</span><span class="n">o</span> <span class="n">helloworld</span> <span class="n">helloworld</span><span class="o">.</span><span class="n">cpp</span>
 <span class="o">./</span><span class="n">helloworld</span>
 </pre></div>
