@@ -82,7 +82,7 @@ int main() {
 }
 ```
 
-In this exmaple, C++ is able to understand which `add` function we are referring to because when we do `add(3, 4)`, we are passing `int` values, so it corresponds to the first function definition, whereas when we do `add(3.5, 4.5)` we are passing `double` typed values, corresponding to the second function definition.
+In this example, C++ is able to understand which `add` function we are referring to because when we do `add(3, 4)`, we are passing `int` values, so it corresponds to the first function definition, whereas when we do `add(3.5, 4.5)` we are passing `double` typed values, corresponding to the second function definition.
 
 
 ```{admonition} Exercise 3.2

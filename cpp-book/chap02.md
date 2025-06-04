@@ -309,3 +309,67 @@ int main() {
     return 0;
 }
 ```
+
+## Classes
+
+Classes in both Python and C++ allow you to create user-defined data types with attributes (data members) and methods (member functions) to manipulate these attributes. In Python, we could write a class like in the following example.
+
+```{code-block} python
+---
+linenos: True
+---
+class MyClass:
+  def __init__(self, value):
+    self.value = value
+  
+  def display(self):
+    print(self.value)
+
+obj = MyClass(10)
+obj.display()
+```
+
+In C++, the same class can be written like this:
+```{code-block} cpp
+---
+linenos: True
+---
+#include <iostream>
+using namespace std;
+
+class MyClass {
+  public:
+    // Constructor, equivalent of __init__ in Python
+    MyClass(int val) : value(val) {}
+
+    void display() {
+      cout << value << endl;
+    }
+  private:
+    int value;
+};
+
+int main() {
+  MyClass obj(10);
+  obj.display();
+  return 0;
+}
+```
+
+In this example, it is evident that C++ has some additonal elements not seen in Python. Firstly, we see the access specifiers `public` and `private` which dictate how the access permissions of the member attributes and methods. Here is what they mean:
+
+1. `public`: Members are accessible from outside the class
+1. `private`: Members are accesible only inside the class.
+
+Note that although you can indicate in Python that a member function/attribute is public or private by, for instance, including underscore characters at the beggining of the variable name (e.g `_private_var`) and not including these characters for a public attribute (e.g.`public_var`), these are just conventions and the language itself does not enforce this distinction. In C++, however, this distinction is enforced and thus a protected variable cannot be accessed outside the class.
+
+You might also notice the line in the class in C++: `MyClass(int val) : value(val) {}`. This is a special method called the constructor and its job is to perform initializations, similar to how `__init__` works in Python. The name of the constructor is always the same as the name of the class itself, and the syntax is as follows:
+
+```cpp
+ClassName(typevar1 var1, typevar2 var2) : classattrib1(var1), classattrib2(var2) {}
+```
+
+In the constructor, `classattrib1(var1)` is part of the initializer list, which initializes the class attributes `classattrib1` and `classattrib2` with the values passed as parameters `var1` and `var2`.
+
+[^hard2read]: There are actual [competitions](https://en.wikipedia.org/wiki/International_Obfuscated_C_Code_Contest) where people take advantage of this and they compete to see who can make the hardest code to read in the most creative way.
+[^arrsize]: If you are familiar with how NumPy implements arrays, you might realize that C++ arrays have a fixed size for tha same reason that NumPy arrays have a fixed size.

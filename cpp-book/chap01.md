@@ -28,7 +28,7 @@ language: cpp
 
 ## Compiling C++ Source Code
 
-```{figure} ./assets/mermaid-diagram-2024-06-05-001615.svg
+```{figure} assets/mermaid-diagram-2024-06-05-001615.svg
 ---
 align: right
 ---
